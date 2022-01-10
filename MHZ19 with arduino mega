@@ -19,7 +19,7 @@ void loop()
     measurement_t m = mhz19_uart->getMeasurement();
 
     Serial.print("co2: ");
-    Serial.println(map(m.co2_ppm, 0, 5000, 0, 2000)); // sets the max range to 2000ppm - maximalna vyzobrazená hodnota je 2000 a minimálna 0
+    Serial.println(map(m.co2_ppm, 0, 5000, 0, 2000)); // sets the max range to 2000ppm - maximalna vyzobrazená hodnota je 2000ppm a minimálna 0
 
     Serial.print("teplota: ");
     Serial.println(m.temperature); // classic temperature from the liblary - klasická teplota  
