@@ -1,0 +1,28 @@
+#include "MHZ19.h"
+
+const int rx_pin = 11; 
+const int tx_pin = 10; 
+
+int pwmpin = 9; 
+
+
+MHZ19 *mhz19_uart = new MHZ19(rx_pin,tx_pin);
+MHZ19 *mhz19_pwm = new MHZ19(pwmpin);
+void setup()
+{
+    Serial.begin(9600);// to show the results in the COM3 - Pre zobrazenie výsledku
+    mhz19_uart->begin(rx_pin, tx_pin);
+    mhz19_uart->setAutoCalibration(true);
+}
+void loop()
+{
+    measurement_t m = mhz19_uart->getMeasurement();
+
+    Serial.print("co2: ");
+    Serial.println(map(m.co2_ppm, 0, 5000, 0, 2000)); // sets the max range to 2000ppm - maximalna vyzobrazená hodnota je 2000 a minimálna 0
+
+    Serial.print("teplota: ");
+    Serial.println(m.temperature); // classic temperature from the liblary - klasická teplota  
+    
+    delay(500);
+}
